@@ -25,9 +25,9 @@ $router->post('products', ['uses' => 'ProductController@create']);
 $router->post('products/items', ['uses' => 'ProductController@addItems']);
 
 //update product
-$router->put('/products/{id}', ['uses' => 'ProductController@update']);
+$router->put('/product/{id}', ['uses' => 'ProductController@update']);
 //update product set price
-$router->put('/products/{id}/price', ['uses' => 'ProductController@setProductPrice']);
+$router->put('/product/{id}/price', ['uses' => 'ProductController@setProductPrice']);
 
 //get price
-$router->get('/products/{id}/price', ['uses' => 'ProductController@getProductPrice']);
+$router->get('/product/{id}/price', ['uses' => 'ProductController@getProductPrice']);
