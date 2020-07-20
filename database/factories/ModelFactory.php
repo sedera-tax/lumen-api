@@ -22,3 +22,11 @@ $factory->define(User::class, function (Faker $faker) {
         'email' => $faker->email,
     ];
 });
+
+$factory->define(App\Product::class, function (Faker $faker) {
+    return [
+        'name' => $faker->name,
+        'price' => rand(0, 2000),
+        'description'=>$faker->text,
+    ];
+});
