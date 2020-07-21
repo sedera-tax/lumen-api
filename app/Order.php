@@ -4,9 +4,13 @@ namespace App;
 
 use Illuminate\Database\Eloquent\Model;
 
-class ProductItems extends Model
+class Order extends Model
 {
-    protected $primaryKey = 'product_items_id';
+    protected $primaryKey = 'order_id';
+
+    protected $casts = [
+        'content' => 'array'
+    ];
 
     /**
      * The attributes that are mass assignable.
@@ -14,7 +18,7 @@ class ProductItems extends Model
      * @var array
      */
     protected $fillable = [
-        'quantity', 'product_id', 'expired_date',
+        'content',
     ];
 
     /**

@@ -31,3 +31,9 @@ $router->put('/product/{id}/price', ['uses' => 'ProductController@setProductPric
 
 //get price
 $router->get('/product/{id}/price', ['uses' => 'ProductController@getProductPrice']);
+
+//Add order
+$router->post('orders', ['uses' => 'OrderController@create']);
+
+//Alert product expired in 48H
+$router->get('alert-products', ['uses' => 'CronController@alertExpiredProduct']);

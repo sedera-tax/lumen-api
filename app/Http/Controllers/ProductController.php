@@ -100,6 +100,13 @@ class ProductController extends Controller
         return $this->update($request, $id);
     }
 
+    /**
+     * GET PRODUCT PRICE
+     * @param Request $request
+     * @param $id
+     * @return \Illuminate\Http\JsonResponse
+     * @throws \Illuminate\Validation\ValidationException
+     */
     public function getProductPrice(Request $request, $id)
     {
         if (!$id) {
