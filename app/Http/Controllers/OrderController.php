@@ -39,6 +39,7 @@ class OrderController extends Controller
                 if ($quantityRequest > 0) {
                     //get items expire in next 48h
                     $itemsBefore48H = ProductItems::where('product_id', '=', $product_id)
+                        ->where('quantity', '>', 0)
                         ->whereDate('expired_date', '>=', Carbon::now()->toDateString())
                         ->whereDate('expired_date', '<=', Carbon::now()->addDays(2)->toDateString())
                         ->orderBy('quantity', 'ASC')
@@ -69,6 +70,7 @@ class OrderController extends Controller
                     if ($quantityRequest > 0) {
                         //get items expire after 48h
                         $itemsAfter48H = ProductItems::where('product_id', '=', $product_id)
+                            ->where('quantity', '>', 0)
                             ->whereDate('expired_date', '>', Carbon::now()->addDays(2)->toDateString())
                             ->orderBy('quantity', 'ASC')
                             ->get();
@@ -105,13 +107,13 @@ class OrderController extends Controller
             else {
                 return response()->json(["error" => 1, "message" => "Product " . $product_id . " does not exist"], 404);
             }
+        }
 
-            if (!empty($result)) {
-                foreach ($result as $res) {
-                    $item = ProductItems::find($res["product_items_id"]);
-                    $item->quantity = $item->quantity - $res["quantity"];
-                    $item->save();
-                }
+        if (!empty($result)) {
+            foreach ($result as $res) {
+                $item = ProductItems::find($res["product_items_id"]);
+                $item->quantity = $item->quantity - $res["quantity"];
+                $item->save();
             }
         }
 
